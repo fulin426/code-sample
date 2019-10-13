@@ -210,7 +210,7 @@ class ContactForm extends Component {
 
     return (
       <Container>
-        <div className="text-center">
+        <div className="text-center form-container">
           <h2>Contact Form</h2>
           <span className="error-msg">
             <p>{errMsg}</p>
