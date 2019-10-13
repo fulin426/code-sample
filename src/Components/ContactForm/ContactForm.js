@@ -34,7 +34,7 @@ class ContactForm extends Component {
   state = {
     ...initialInputs,
     isFetching: false,
-    isSuccess: true,
+    isSuccess: false,
     errors: initialErrors
   };
 
