@@ -10,7 +10,8 @@ import {
   Row,
   Col,
   Label,
-  FormFeedback
+  FormFeedback,
+  Alert
 } from "reactstrap";
 import "./contact-form.css";
 
@@ -105,6 +106,7 @@ class ContactForm extends Component {
         .catch(err => {
           console.log(err);
           this.setState({
+            isFetching: false,
             errMsg: "Something went wrong with your submission"
           });
         });
@@ -178,7 +180,7 @@ class ContactForm extends Component {
           </Row>
           <FormGroup>
             <FormGroup>
-              <Label for="Info">More Information</Label>
+              <Label for="Info">Please Describe your Project</Label>
               <Input
                 type="textarea"
                 name="additionalInfo"
@@ -187,7 +189,7 @@ class ContactForm extends Component {
                 onChange={this.handleChange}
                 invalid={errors.additionalInfo}
               />
-              <FormFeedback>More Information Required</FormFeedback>
+              <FormFeedback>Description Required</FormFeedback>
             </FormGroup>
           </FormGroup>
           <button className="btn-std size-med btn-container">
@@ -205,16 +207,20 @@ class ContactForm extends Component {
     }
   }
 
+  renderErrorAlert() {
+    const { errMsg } = this.state;
+    if (errMsg) {
+      return <Alert color="danger">{errMsg}</Alert>;
+    }
+  }
+
   render() {
     const { errMsg } = this.state;
-
     return (
       <Container>
         <div className="text-center form-container">
           <h2>Contact Form</h2>
-          <span className="error-msg">
-            <p>{errMsg}</p>
-          </span>
+          {this.renderErrorAlert()}
         </div>
         {this.renderForm()}
         {this.renderSuccessPage()}
